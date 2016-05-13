@@ -21,8 +21,6 @@ button#arrow_v{ -moz-user-select: none;
     height: 694px;
     width: 30px;
     -webkit-appearance: slider-vertical;
-
-
 }
 #crop{
     pointer-events:none;
@@ -125,6 +123,7 @@ button#arrow_v{ -moz-user-select: none;
     cursor:pointer;
     margin: 0;
 }
+
 #size_mark{
     background: aquamarine;
     position: absolute;
@@ -133,6 +132,7 @@ button#arrow_v{ -moz-user-select: none;
     height: 700px;
     width: 8px;
 }
+
 #mark_s{
     height: 12px;
     width: 4px;
@@ -146,11 +146,11 @@ button#arrow_v{ -moz-user-select: none;
     margin-left: 63px;
     background-image: url(arrow_v_green.png) ;
 }
+
 #arrow_h{
-
     background-image: url(arrow_h_green.png) ;
-
 }
+
 .arrow_vh{
   background-size: 83%;
     background-repeat: no-repeat;
