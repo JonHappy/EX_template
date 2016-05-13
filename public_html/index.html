@@ -4,18 +4,16 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Page</title>
-<!--
         <script src="js/jquery/external/jquery/jquery.js" type="text/javascript"></script>
         <script src="js/jquery/jquery-ui.js" type="text/javascript"></script>
-        <script src="js/jquery/datepicker-ru.js" type="text/javascript"></script>
-        <link href="js/jquery/jquery-ui.css" rel="stylesheet" type="text/css"/>
-        <link href="js/jquery/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/>
-        <link href="js/jquery/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/>-->
+        <!--<script src="js/jquery/datepicker-ru.js" type="text/javascript"></script>-->
+        <!--<link href="js/jquery/jquery-ui.css" rel="stylesheet" type="text/css"/>-->
+        <!--<link href="js/jquery/jquery-ui.structure.min.css" rel="stylesheet" type="text/css"/>-->
+        <!--<link href="js/jquery/jquery-ui.theme.min.css" rel="stylesheet" type="text/css"/>-->
 
-<script src="js/jquery/external/jquery/jquery.js" type="text/javascript"></script>
 
-<link href="CSS/page.css" rel="stylesheet" type="text/css"/>
-
+        <link href="CSS/page.css" rel="stylesheet" type="text/css"/>
+        <link rel="icon" type="image/png" href="pic/arrow_ltr2.png" />
     </head>
     <body>
 
@@ -27,8 +25,29 @@
             <tr><td class="t1">gggggg</td><td class="t2">gggggg</td></tr>
         </table>
         <input id="xx" value="xxxx" type="button">
+
         <script>
             "use strict";
+
+
+            $('#tbl1 .t1').hover(
+                    function () {
+                        $(this).css('background','#ff0000');
+                    },
+                    function () {
+                        $(this).css('background','none');
+                    });
+
+
+
+
+
+
+
+
+
+
+
             function modal(name, callback_prefix) {
                 this.name = name;
                 this.callback = callback_prefix + '_' + name + '_';
@@ -96,18 +115,45 @@
                 }
                 #title span{
                     margin-left: 5px;
+                    flex: 1 1 auto;
+                }
+                #img_box{
+                    width: 100%;
+                    display: flex;
+                    justify-content:flex-start;
+                    height: 70px;
+                    position: absolute;
+                    bottom: 0px;
+                    background: #dad55e;
+                }
+                #img_add{
+                    position: absolute;
+                    top: 0px;
+                    right: 0px;
+                    width: 13px;
+                    height: 13px;
                 }
             </style>
 
             <div id="main">
                 <div id="title"><span>Модальное</span>
+                    <img id="title_ok" src="pic/tick.png" alt=""/>
                     <img id="title_img" src="pic/del_.png" alt=""/>
+                </div>
+                <div id="img_box">
+                    <img id="img_add" src="pic/add1.png" alt=""/>
                 </div>
             </div>
             <script>
+
+
                 var x = document.getElementById('block_screen').shadowRoot;
-//                $(x.getElementById('main')).draggable();
-                console.log($(x.getElementById('main')));
+                $(x.getElementById('main')).draggable();
+                console.log($(x.getElementById('img_add')));
+                $(x.getElementById("img_add")).on('click',function (){
+                    console.log('999999999');
+                    var wo = window.open('\pic.html', '00000');
+                });
             </script>
         </template>
 
@@ -287,7 +333,7 @@
                     <tr><td class="tb1">пункт3</td></tr>
                 </table>
             </div>
-            <script> 
+            <script>
                 var w;
                 setTimeout(fun, 0);
                 function fun() {
