@@ -154,6 +154,8 @@
 
 
             $(document).ready(function () {
+                window.xx = true;
+                window.yy = true;
                 $(document).keydown(function (event) {
                     var k = event.keyCode || event.charCode;
                     switch (k) {
@@ -199,13 +201,9 @@
                         new_img.top = ui.position.top;
                         current_img.left = ui.originalPosition.left;
                         new_img.left = ui.position.left;
-
-//                        console.log(new_img.left);
                         tr_or();
                     },
                     start: function (event, ui) {
-//                        window.yy = false;
-//                        window.xx = false;
                         if (window.shiftDown) {
                             window.yy = true;
                             current_img.left = ui.originalPosition.left;
@@ -219,10 +217,7 @@
                             $('#img').draggable("option", "axis", "x");
                         }
 
-                        if (!window.xx & !window.yy) {
-                        }
                         $('#img').draggable("option", "axis", false);
-                        console.log(window.xx + "   " + window.yy);
                         if (!window.xx) {
                             $('#img').draggable("option", "axis", "y");
                         }
@@ -470,8 +465,9 @@
 
 
             function work() {
-                if (fb.length === 0)
+                if (fb.length === 0) {
                     window.close();
+                }
                 var pic = new Image();
                 pic.src = fb.shift().src;
                 $('#img').attr('src', pic.src);
