@@ -100,7 +100,7 @@
                 current_img.y = new_img.y;
             }
 
-//            -- переключатель full/preview --
+//            <%-- переключатель full/preview --%>
             $(document).on('click', '#c1', function () {
                 if (crop.height === pics.preview_height) {
 //            <%-- включение режима full --%>
@@ -148,6 +148,8 @@
 
 
             });
+
+
 //            <%-- назначение пермещения --%>
 
 
@@ -157,9 +159,13 @@
                     switch (k) {
                         case 16:
                             window.shiftDown = true;
+                            window.xx = false;
+                            window.yy = true;
                             $('#arrow_h').css('background-image', 'url(pic/arrow_h_red.png)');
                             break;
                         case 17:
+                            window.yy = false;
+                            window.xx = true;
                             $('#arrow_v').css('background-image', 'url(pic/arrow_v_red.png)');
                             window.ctrlDown = true;
                             break;
@@ -170,10 +176,14 @@
                     var k = event.keyCode || event.charCode;
                     switch (k) {
                         case 16:
+                            window.xx = true;
+                            window.yy = true;
                             $('#arrow_h').css('background-image', 'url(pic/arrow_h_green.png)');
                             window.shiftDown = false;
                             break;
                         case 17:
+                            window.xx = true;
+                            window.yy = true;
                             $('#arrow_v').css('background-image', 'url(pic/arrow_v_green.png)');
                             window.ctrlDown = false;
                             break;
@@ -185,20 +195,17 @@
 
                 $('#img').draggable({
                     stop: function (event, ui) {
-                        if (!window.xx) {
-                            current_img.top = ui.originalPosition.top;
-                            new_img.top = ui.position.top;
-                        }
-                        if (!window.yy) {
-                            current_img.left = ui.originalPosition.left;
-                            new_img.left = ui.position.left;
-                        }
-                        console.log(new_img.left);
+                        current_img.top = ui.originalPosition.top;
+                        new_img.top = ui.position.top;
+                        current_img.left = ui.originalPosition.left;
+                        new_img.left = ui.position.left;
+
+//                        console.log(new_img.left);
                         tr_or();
                     },
                     start: function (event, ui) {
-                        window.yy = false;
-                        window.xx = false;
+//                        window.yy = false;
+//                        window.xx = false;
                         if (window.shiftDown) {
                             window.yy = true;
                             current_img.left = ui.originalPosition.left;
@@ -213,7 +220,14 @@
                         }
 
                         if (!window.xx & !window.yy) {
-                            $('#img').draggable("option", "axis", false);
+                        }
+                        $('#img').draggable("option", "axis", false);
+                        console.log(window.xx + "   " + window.yy);
+                        if (!window.xx) {
+                            $('#img').draggable("option", "axis", "y");
+                        }
+                        if (!window.yy) {
+                            $('#img').draggable("option", "axis", "x");
                         }
                     }
 
@@ -312,6 +326,16 @@
                 }
                 window.xx = !window.xx;
             });
+            $(document).on('click', '#arrow_v', function () {
+                if (window.yy) {
+                    $('#arrow_v').css('background-image', 'url(pic/arrow_v_red.png)');
+                } else {
+                    $('#arrow_v').css('background-image', 'url(pic/arrow_v_green.png)');
+                }
+                window.yy = !window.yy;
+            });
+
+
 //            <%-------------------------- скорость ресайза --------------------------------------%>
             $(document).on('click', '#c2', function () {
                 if (x_xx === 0.001) {
