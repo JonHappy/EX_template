@@ -423,7 +423,8 @@
                     var reader = new FileReader();
 
                     reader.onload = function (e) {
-                        console.dir('onload  ' + (--g));
+                        --g;
+//                        console.dir('onload  ' + (--g));
                         var pic = new Image();
                         pic.src = e.target.result;
                         fb.push(pic);
@@ -450,7 +451,8 @@
                     var reader = new FileReader();
 
                     reader.onload = function (e) {
-                        console.dir('onload  ' + (--g));
+                        --g;
+//                        console.dir('onload  ' + (--g));
                         var pic = new Image();
                         pic.src = e.target.result;
                         fb.push(pic);
@@ -612,7 +614,7 @@
 //                var w = v.clone();
 //                v.removeAttr('id');
 //                v.attr('data-pic', 'new');
-                v.append('<img src="' + $('#' + id_crop[0]).attr('src') + '"   height="70"   data-img="' + $('#' + id_crop[1]).attr('src') + '"/>');
+                v.append('<img  class="imggg" src="' + $('#' + id_crop[0]).attr('src') + '"   height="70"   data-img="' + $('#' + id_crop[1]).attr('src') + '"/>');
 //                v.find('button img').attr('src', 'pic/del.webp');
 //                v.parent().append(w);
                 $('.cropped').empty();
