@@ -20,7 +20,7 @@ button#arrow_v{ -moz-user-select: none;
     z-index: 10;
     height: 694px;
     width: 30px;
-    -webkit-appearance: slider-vertical; 
+    -webkit-appearance: slider-vertical;
 
 
 }
@@ -55,7 +55,7 @@ button#arrow_v{ -moz-user-select: none;
     -webkit-margin-after: 1px;
     -webkit-margin-start: auto;
     -webkit-margin-end: auto;
-    cursor:pointer 
+    cursor:pointer
 }
 .cropped{
     position: absolute;
@@ -84,9 +84,9 @@ button#arrow_v{ -moz-user-select: none;
     /* position: absolute; */
     border: 1px solid #c0c0c0;
 
-    margin-left: 386px; 
+    margin-left: 386px;
     width: 358px;
-    margin-bottom: 5px; 
+    margin-bottom: 5px;
     /* top: calc(100% - 15px); */
 }
 #mark{
@@ -144,12 +144,12 @@ button#arrow_v{ -moz-user-select: none;
 
 #arrow_v{
     margin-left: 63px;
-    background-image: url(/mo/pic/arrow_v_green.png) ;
+    background-image: url(arrow_v_green.png) ;
 }
 #arrow_h{
-      
-    background-image: url(/mo/pic/arrow_h_green.png) ;
-    
+
+    background-image: url(arrow_h_green.png) ;
+
 }
 .arrow_vh{
   background-size: 83%;
@@ -160,5 +160,5 @@ button#arrow_v{ -moz-user-select: none;
     width: 22px;
     outline: none;
     vertical-align: bottom;
-    text-align: center;  
+    text-align: center;
 }
