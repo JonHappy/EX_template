@@ -347,8 +347,23 @@
 //            <%-- ресайз --%>
             $('#div1').mousewheel(function (event, delta) {
 
+
+                if (window.shiftDown) {
+                    new_img.top = delta > 0 ? current_img.top + 1 : current_img.top - 1;
+                    new_img.left = current_img.left;
+                    tr_or();
+                }
+                if (window.ctrlDown) {
+                    new_img.left = delta > 0 ? current_img.left + 1 : current_img.left - 1;
+                    new_img.top = current_img.top;
+                    tr_or();
+                }
+
+
+                if (!window.ctrlDown && !window.shiftDown) {
+                    setres(delta > 0 ? x_xx : -x_xx);
+                }
 //                img.scale += delta > 0 ? x_xx : -x_xx;
-                setres(delta > 0 ? x_xx : -x_xx);
 //                var new_h = img.height * img.scale;
 //                new_img.x = new_img.x * new_h / new_img.height;
 //                new_img.height = new_h;
@@ -362,6 +377,7 @@
 //                new_img.top = (Cy - new_img.y);
 //                new_img.left = (Cx - new_img.x);
 //                set_css_img();
+                return false;
             });
             function setres(p) {
                 img.scale += p;
@@ -411,6 +427,7 @@
                 img.rotate += delta > 0 ? 1 : -1;
                 $('#rotate').val(img.rotate);
                 set_css_img();
+                return false;
             });
 
 //            <%-- загрузка файла --%>
