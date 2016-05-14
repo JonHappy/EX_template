@@ -344,22 +344,23 @@
                 }
             });
 
-//            <%-- ресайз --%>
+//            <%-- ресайз + перемещкние (мышь в поле длякартинки --%>
             $('#div1').mousewheel(function (event, delta) {
 
-
+//                  shiftDown + mousewheel - > перемещение по вертикали
                 if (window.shiftDown) {
                     new_img.top = delta > 0 ? current_img.top + 1 : current_img.top - 1;
                     new_img.left = current_img.left;
                     tr_or();
                 }
+//                  ctrlDown + mousewheel - > перемещение по горионтали
                 if (window.ctrlDown) {
                     new_img.left = delta > 0 ? current_img.left + 1 : current_img.left - 1;
                     new_img.top = current_img.top;
                     tr_or();
                 }
 
-
+//                  изменение размера
                 if (!window.ctrlDown && !window.shiftDown) {
                     setres(delta > 0 ? x_xx : -x_xx);
                 }
@@ -469,7 +470,6 @@
 
                     reader.onload = function (e) {
                         --g;
-//                        console.dir('onload  ' + (--g));
                         var pic = new Image();
                         pic.src = e.target.result;
                         fb.push(pic);
