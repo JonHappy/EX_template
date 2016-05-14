@@ -174,6 +174,7 @@
                     }
 
                 });
+
                 $(document).keyup(function (event) {
                     var k = event.keyCode || event.charCode;
                     switch (k) {
@@ -192,8 +193,6 @@
                     }
 
                 });
-
-
 
                 $('#img').draggable({
                     stop: function (event, ui) {
@@ -228,18 +227,7 @@
 
                 });
 
-//                $('#v_line').draggable({
-//                    axis: "x",
-//                    drag: function (event, ui) {
-//                        crop.width = ui.position.left * 2;
-//                        $('#crop').css({
-//                            height: crop.height,
-//                            width: crop.width,
-//                            left: Cx - crop.width / 2 - 1,
-//                            top: Cy - crop.height / 2 - 1
-//                        });
-//                    }
-//                });
+
                 $('#v_line').css({
                     left: $('#crop').width() / 2,
                     top: 0
@@ -249,6 +237,7 @@
                 });
 
                 $('#c1').attr('data-v', crop.id);
+
                 var v = 0;
                 $('#mark_s').draggable({
                     axis: "y",
@@ -257,17 +246,6 @@
                         var t = 345 - ui.position.top;
                         setres(v < t ? x_xx : -x_xx);
                         v = t;
-//                        crop.width = ui.position.left * 2;
-//                        $('#crop').css({
-//                            height: crop.height,
-//                            width: crop.width,
-//                            left: Cx - crop.width / 2 - 1,
-//                            top: Cy - crop.height / 2 - 1
-//                        });
-//                        $('#v_line').css({
-//                            left: $('#crop').width() / 2,
-//                            top: 0
-//                        });
                     },
                     revert: true,
                     revertDuration: 30
@@ -291,6 +269,7 @@
                         });
                     }
                 });
+
                 $('#mark_b').draggable({
                     axis: "y",
                     containment: "parent",
@@ -321,6 +300,7 @@
                 }
                 window.xx = !window.xx;
             });
+
             $(document).on('click', '#arrow_v', function () {
                 if (window.yy) {
                     $('#arrow_v').css('background-image', 'url(pic/arrow_v_red.png)');
@@ -364,22 +344,9 @@
                 if (!window.ctrlDown && !window.shiftDown) {
                     setres(delta > 0 ? x_xx : -x_xx);
                 }
-//                img.scale += delta > 0 ? x_xx : -x_xx;
-//                var new_h = img.height * img.scale;
-//                new_img.x = new_img.x * new_h / new_img.height;
-//                new_img.height = new_h;
-//
-//                var new_w = img.width * img.scale;
-//                new_img.y = new_img.y * new_w / new_img.width;
-//                new_img.width = new_w;
-//
-//                current_img.x = new_img.x;
-//                current_img.y = new_img.y;
-//                new_img.top = (Cy - new_img.y);
-//                new_img.left = (Cx - new_img.x);
-//                set_css_img();
                 return false;
             });
+
             function setres(p) {
                 img.scale += p;
 
@@ -397,6 +364,7 @@
                 new_img.left = (Cx - new_img.x);
                 set_css_img();
             }
+
             function set_css_img() {
                 var ang = -1 * img.rotate * deg_to_rad;
                 matrix[0] = Math.cos(ang);
@@ -446,8 +414,9 @@
                         var pic = new Image();
                         pic.src = e.target.result;
                         fb.push(pic);
-                        if (g === 0)
+                        if (g === 0) {
                             work();
+                        }
                     };
 
                     reader.readAsDataURL(this.files[i]);
@@ -459,6 +428,7 @@
             target.addEventListener("dragover", function (event) {
                 event.preventDefault(); // отменяем действие по умолчанию
             }, false);
+
             target.addEventListener("drop", function (event) {
                 // отменяем действие по умолчанию
                 event.preventDefault();
@@ -473,8 +443,9 @@
                         var pic = new Image();
                         pic.src = e.target.result;
                         fb.push(pic);
-                        if (g === 0)
+                        if (g === 0) {
                             work();
+                        }
                     };
                     reader.readAsDataURL(event.dataTransfer.files[i]);
                 }
@@ -519,7 +490,6 @@
                     return;
                 }
 
-
                 if (crop.id === 'full') {
                     cropImg |= 2;
                 }
@@ -529,6 +499,7 @@
                 if (cropImg === 3) {
                     $('#save').removeAttr('disabled');
                 }
+
                 var canvas = document.createElement("canvas");
                 var context = canvas.getContext("2d");
 
