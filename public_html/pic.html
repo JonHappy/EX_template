@@ -553,7 +553,7 @@
                 context.drawImage(pic, x, y, crop.width, crop.height, 0, 0, crop.width, crop.height);
                 var k = crop.id === 0 ? 1.0 : 0.75;
                 document.querySelector('.cropped').innerHTML += '<div ><img id="' + crop.id + '" src="' + canvas.toDataURL("image/jpeg", k) + '"></div>';
-                $('#' + crop.id).parent().append('<img src="pic/del.webp" class="del"  width="18" height="18" alt="del"/>');
+                $('#' + crop.id).parent().append('<img src="pic/del_.png" class="del"  width="18" height="18" alt="del"/>');
                 console.timeEnd('x1');
                 $('#c1').trigger('click');
             });
@@ -577,7 +577,7 @@
                     sW = Math.round(sW / 2);
                     sH = Math.round(sH / 2);
                 }
-                return canvas.toDataURL("image/webp", 1);
+                return canvas.toDataURL("image/jpeg", 1);
             }
 
 
