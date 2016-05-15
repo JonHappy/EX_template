@@ -405,12 +405,13 @@
             document.querySelector('#file').addEventListener('change', function (evt) {
                 var n = evt.target.files.length;
                 var g = n;
+                var file;
+                var reader = new FileReader();
                 for (var i = 0; i < n; i++) {
-                    var reader = new FileReader();
 
                     reader.onload = function (e) {
                         --g;
-//                        console.dir('onload  ' + (--g));
+                        console.dir('onload  ');
                         var pic = new Image();
                         pic.src = e.target.result;
                         fb.push(pic);
@@ -418,9 +419,9 @@
                             work();
                         }
                     };
-
-                    reader.readAsDataURL(this.files[i]);
+                    file = this.files[i];
                 }
+                reader.readAsDataURL(file);
             });
 
 
