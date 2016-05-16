@@ -20,7 +20,7 @@
             <div id="crop"><div></div></div>
             <img id="img" src="" alt=""/>
         </div>
-        <div>
+        <div id="div_rotate">
             <input  id="rotate" type="range" value="0" min="-180" max="180" step="1">
         </div>
         <div id="right_mark"><div id="mark"></div></div>
@@ -405,10 +405,9 @@
             document.querySelector('#file').addEventListener('change', function (evt) {
                 var n = evt.target.files.length;
                 var g = n;
-                var file;
-                var reader = new FileReader();
                 for (var i = 0; i < n; i++) {
-
+                    var reader = new FileReader();
+                    reader.readAsDataURL(this.files[i]);
                     reader.onload = function (e) {
                         --g;
                         console.dir('onload  ');
@@ -419,9 +418,7 @@
                             work();
                         }
                     };
-                    file = this.files[i];
                 }
-                reader.readAsDataURL(file);
             });
 
 
@@ -438,7 +435,7 @@
                 var g = n;
                 for (var i = 0; i < n; i++) {
                     var reader = new FileReader();
-
+                    reader.readAsDataURL(event.dataTransfer.files[i]);
                     reader.onload = function (e) {
                         --g;
                         var pic = new Image();
@@ -448,7 +445,6 @@
                             work();
                         }
                     };
-                    reader.readAsDataURL(event.dataTransfer.files[i]);
                 }
             }, false);
 

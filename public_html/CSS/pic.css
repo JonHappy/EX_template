@@ -1,7 +1,7 @@
 button#arrow_v{ -moz-user-select: none;
-      -webkit-user-select: none;
-      user-select: none;
-      -ms-user-select: none;}
+                -webkit-user-select: none;
+                user-select: none;
+                -ms-user-select: none;}
 #div1{
     position: absolute;
     top: 10px;
@@ -15,12 +15,19 @@ button#arrow_v{ -moz-user-select: none;
 #div1 img{
     position: relative;
 }
+#div_rotate{
+    height: 694px;
+    margin-left: 20px;
+    width: 30px;
+}
 #rotate{
     background: #ffffff;
     z-index: 10;
-    height: 694px;
-    width: 30px;
-    -webkit-appearance: slider-vertical;
+    height: 30px;
+    width: 694px;
+    /*-webkit-appearance: slider-vertical;*/
+    transform-origin: 0 0;
+    transform: rotate(90deg);
 }
 #crop{
     pointer-events:none;
@@ -152,7 +159,7 @@ button#arrow_v{ -moz-user-select: none;
 }
 
 .arrow_vh{
-  background-size: 83%;
+    background-size: 83%;
     background-repeat: no-repeat;
     background-position: center center;
     background-color: rgb(223, 240, 255);
