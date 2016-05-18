@@ -25,7 +25,6 @@ button#arrow_v{ -moz-user-select: none;
     z-index: 10;
     height: 30px;
     width: 694px;
-    /*-webkit-appearance: slider-vertical;*/
     transform-origin: 0 0;
     transform: rotate(90deg);
 }
@@ -35,7 +34,6 @@ button#arrow_v{ -moz-user-select: none;
     position: absolute;
     border: 1px #000000 solid;
     z-index: 400;
-
 }
 #crop>div{
     pointer-events:none;
@@ -86,14 +84,12 @@ button#arrow_v{ -moz-user-select: none;
     right: 0;
 }
 #right_mark{
-    /* position: absolute; */
     border: 1px solid #c0c0c0;
-
     margin-left: 386px;
     width: 358px;
     margin-bottom: 5px;
-    /* top: calc(100% - 15px); */
 }
+
 #mark{
     height: 4px;
     width: 10px;
@@ -102,7 +98,6 @@ button#arrow_v{ -moz-user-select: none;
 }
 
 #bottom_mark{
-    /* background: blue; */
     height: 360px;
     width: 6px;
     position: absolute;
@@ -110,12 +105,14 @@ button#arrow_v{ -moz-user-select: none;
     left: 749px;
     border:  solid 1px #d0d0d0;
 }
+
 #bottom_mark div{
     height: 10px;
     width: 6px;
     background: #cd0a0a;
     cursor: pointer;
 }
+
 #h_line{
     border: none;
     background-color: red;
@@ -123,9 +120,7 @@ button#arrow_v{ -moz-user-select: none;
     height: 1px;
     z-index: 401;
     width: 100%;
-
     position: absolute;
-
     top: -10px;
     cursor:pointer;
     margin: 0;
