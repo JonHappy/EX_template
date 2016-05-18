@@ -324,7 +324,7 @@
                 }
             });
 
-//            <%-- ресайз + перемещкние (мышь в поле длякартинки --%>
+//            <%-- ресайз + перемещкние (мышь в поле для картинки --%>
             $('#div1').mousewheel(function (event, delta) {
 
 //                  shiftDown + mousewheel - > перемещение по вертикали
@@ -539,7 +539,8 @@
 
                 context.translate(sq / 2, sq / 2);
                 context.rotate((img.rotate * Math.PI) / 180);
-                context.drawImage(pic, -sq / 2, -sq / 2);
+                var z1=-sq / 2;
+                context.drawImage(pic, z1, z1);
                 pic.src = canvas.toDataURL("image/jpeg", 1.0);
                 canvas.height = crop.height;
                 canvas.width = crop.width;
