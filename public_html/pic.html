@@ -496,23 +496,13 @@
                 if (cropImg === 3) {
                     $('#save').removeAttr('disabled');
                 }
-
+                var canvas_tmp = document.createElement('canvas');
                 var canvas = document.createElement("canvas");
                 var context = canvas.getContext("2d");
 
                 var pic = new Image();
                 pic.src = $('#img').attr('src');
                 var sq = Math.sqrt(crop.width * crop.width + crop.height * crop.height);
-
-
-//                var x = new_img.x * pic.width / new_img.width - wc / 2 / img.scale;
-//                var y = new_img.y * pic.height / new_img.height - hc / 2 / img.scale;
-//                var w = wc / img.scale;
-//                var h = hc / img.scale;
-//                w = x >= 0 ? w : w - Math.abs(x);
-//                h = y >= 0 ? h : h - Math.abs(x);
-//                x =  0;
-//                y =  0;
 
                 var x = Math.floor((new_img.x - sq / 2) / img.scale);
                 var y = Math.floor((new_img.y - sq / 2) / img.scale);
@@ -524,14 +514,13 @@
                 context.fillStyle = '#ffffff';
                 context.fillRect(0, 0, w, h);
                 context.drawImage(pic, x, y, w, h, 0, 0, w, h);
+
+                canvas_tmp.height = sq;
+                canvas_tmp.width = sq;
                 if (img.scale < 1) {
-                    pic.src = resize(canvas, sq, sq);
+                    canvas_tmp.getContext('2d').drawImage(resize(canvas, sq, sq), 0, 0);
                 } else {
-                    pic.src = canvas.toDataURL("image/jpeg", 1.0);
-                    canvas.height = sq;
-                    canvas.width = sq;
-                    context.drawImage(pic, 0, 0, sq, sq);
-                    pic.src = canvas.toDataURL("image/jpeg", 1.0);
+                    canvas_tmp.getContext('2d').drawImage(canvas, 0, 0, sq, sq);
                 }
 
                 canvas.height = sq;
@@ -539,15 +528,20 @@
 
                 context.translate(sq / 2, sq / 2);
                 context.rotate((img.rotate * Math.PI) / 180);
-                var z1=-sq / 2;
-                context.drawImage(pic, z1, z1);
-                pic.src = canvas.toDataURL("image/jpeg", 1.0);
+                context.drawImage(canvas_tmp, -sq / 2, -sq / 2);
+
+
+                canvas_tmp.height = canvas.height;
+                canvas_tmp.width = canvas.width;
+                canvas_tmp.getContext('2d').drawImage(canvas, 0, 0);
+
                 canvas.height = crop.height;
                 canvas.width = crop.width;
                 x = (sq - crop.width) / 2;
                 y = (sq - crop.height) / 2;
 
-                context.drawImage(pic, x, y, crop.width, crop.height, 0, 0, crop.width, crop.height);
+                context.drawImage(canvas_tmp, x, y, crop.width, crop.height, 0, 0, crop.width, crop.height);
+
                 var k = crop.id === 0 ? 1.0 : 0.75;
                 document.querySelector('.cropped').innerHTML += '<div ><img id="' + crop.id + '" src="' + canvas.toDataURL("image/jpeg", k) + '"></div>';
                 $('#' + crop.id).parent().append('<img src="pic/del_.png" class="del"  width="18" height="18" alt="del"/>');
@@ -566,15 +560,11 @@
                     canvas.width = sW;
                     canvas.height = sH;
                     canvas.getContext('2d').drawImage(img, 0, 0, sW, sH);
-                    img.src = 'about:blank';
-                    img.width = 1;
-                    img.height = 1;
                     img = canvas;
-
                     sW = Math.round(sW / 2);
                     sH = Math.round(sH / 2);
                 }
-                return canvas.toDataURL("image/jpeg", 1);
+                return canvas;
             }
 
 
