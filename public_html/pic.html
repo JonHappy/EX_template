@@ -251,7 +251,7 @@
                     revertDuration: 30
                 });
 
-// перемещенинправой границы
+// перемещение вертикальных границ
                 $('#mark').draggable({
                     axis: "x",
                     containment: "parent",
@@ -271,7 +271,14 @@
                 });
 
                 $('#right_mark').mousewheel(function (event, delta) {
-                    crop.width += delta > 0 ? 1 : -1;
+                    var crop_v = $('#crop').width() / 2;
+                    if (crop.width === 700 && delta > 0) {
+                        return false;
+                    } else if (crop.width === 0 && delta < 0) {
+                        return false;
+                    } else {
+                        crop.width += delta > 0 ? 1 : -1;
+                    }
                     $('#crop').css({
                         height: crop.height,
                         width: crop.width,
@@ -279,15 +286,15 @@
                         top: Cy - crop.height / 2 - 1
                     });
                     $('#v_line').css({
-                        left: $('#crop').width() / 2,
-                        top: 0
+                        left: crop_v
                     });
                     $('#mark').css({
-                        left: $('#crop').width() / 2
+                        left: crop_v
                     });
                     return false;
                 });
 
+// перемещение горизонтальных границ
                 $('#mark_b').draggable({
                     axis: "y",
                     containment: "parent",
@@ -309,10 +316,12 @@
 
             });
 
-            
+
             $('#bottom_mark').mousewheel(function (event, delta) {
                 var crop_h = $('#crop').height() / 2;
                 if ($('#crop').height() === 700 && delta > 0) {
+                    return false;
+                } else if (crop.height === 0 && delta < 0) {
                     return false;
                 } else {
                     crop.height += delta > 0 ? 1 : -1;
@@ -519,6 +528,7 @@
                 new_img.y = $('#div1').height() / 2;
 
                 img.rotate = 0;
+                $('#rotate').val(0);
                 tr_or();
             }
 
