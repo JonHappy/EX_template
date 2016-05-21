@@ -153,132 +153,114 @@
 //            <%-- назначение пермещения --%>
 
 
-            $(document).ready(function () {
-                window.xx = true;
-                window.yy = true;
-                $(document).keydown(function (event) {
-                    var k = event.keyCode || event.charCode;
-                    switch (k) {
-                        case 16:
-                            window.shiftDown = true;
-                            window.xx = false;
-                            window.yy = true;
-                            $('#arrow_h').css('background-image', 'url(pic/arrow_h_red.png)');
-                            break;
-                        case 17:
-                            window.yy = false;
-                            window.xx = true;
-                            $('#arrow_v').css('background-image', 'url(pic/arrow_v_red.png)');
-                            window.ctrlDown = true;
-                            break;
-                    }
+            window.xx = true;
+            window.yy = true;
+            $(document).keydown(function (event) {
+                var k = event.keyCode || event.charCode;
+                switch (k) {
+                    case 16:
+                        window.shiftDown = true;
+                        window.xx = false;
+                        window.yy = true;
+                        $('#arrow_h').css('background-image', 'url(pic/arrow_h_red.png)');
+                        $('#div1').css('cursor', 'url(CSS/arrow3.cur),auto');
+                        break;
+                    case 17:
+                        window.yy = false;
+                        window.xx = true;
+                        $('#arrow_v').css('background-image', 'url(pic/arrow_v_red.png)');
+                        $("#div1").css('cursor', 'url(CSS/arrow4.cur),auto');
+                        window.ctrlDown = true;
+                        break;
+                }
+            });
 
-                });
+            $(document).keyup(function (event) {
+                var k = event.keyCode || event.charCode;
+                switch (k) {
+                    case 16:
+                        window.xx = true;
+                        window.yy = true;
+                        $('#arrow_h').css('background-image', 'url(pic/arrow_h_green.png)');
+                        window.shiftDown = false;
+                        $("#div1").css('cursor', 'url(CSS/resize.cur),auto');
+                        break;
+                    case 17:
+                        window.xx = true;
+                        window.yy = true;
+                        $('#arrow_v').css('background-image', 'url(pic/arrow_v_green.png)');
+                        window.ctrlDown = false;
+                        $("#div1").css('cursor', 'url(CSS/resize.cur),auto');
+                        break;
+                }
+            });
 
-                $(document).keyup(function (event) {
-                    var k = event.keyCode || event.charCode;
-                    switch (k) {
-                        case 16:
-                            window.xx = true;
-                            window.yy = true;
-                            $('#arrow_h').css('background-image', 'url(pic/arrow_h_green.png)');
-                            window.shiftDown = false;
-                            break;
-                        case 17:
-                            window.xx = true;
-                            window.yy = true;
-                            $('#arrow_v').css('background-image', 'url(pic/arrow_v_green.png)');
-                            window.ctrlDown = false;
-                            break;
-                    }
-
-                });
-
-                $('#img').draggable({
-                    stop: function (event, ui) {
-                        current_img.top = ui.originalPosition.top;
-                        new_img.top = ui.position.top;
+            $('#img').draggable({
+                stop: function (event, ui) {
+                    current_img.top = ui.originalPosition.top;
+                    new_img.top = ui.position.top;
+                    current_img.left = ui.originalPosition.left;
+                    new_img.left = ui.position.left;
+                    tr_or();
+                },
+                start: function (event, ui) {
+                    if (window.shiftDown) {
+                        window.yy = true;
                         current_img.left = ui.originalPosition.left;
                         new_img.left = ui.position.left;
-                        tr_or();
-                    },
-                    start: function (event, ui) {
-                        if (window.shiftDown) {
-                            window.yy = true;
-                            current_img.left = ui.originalPosition.left;
-                            new_img.left = ui.position.left;
-                            $('#img').draggable("option", "axis", "y");
-                        }
-                        if (window.ctrlDown) {
-                            window.xx = true;
-                            current_img.top = ui.originalPosition.top;
-                            new_img.top = ui.position.top;
-                            $('#img').draggable("option", "axis", "x");
-                        }
-
-                        $('#img').draggable("option", "axis", false);
-                        if (!window.xx) {
-                            $('#img').draggable("option", "axis", "y");
-                        }
-                        if (!window.yy) {
-                            $('#img').draggable("option", "axis", "x");
-                        }
+                        $('#img').draggable("option", "axis", "y");
+                    }
+                    if (window.ctrlDown) {
+                        window.xx = true;
+                        current_img.top = ui.originalPosition.top;
+                        new_img.top = ui.position.top;
+                        $('#img').draggable("option", "axis", "x");
                     }
 
-                });
+                    $('#img').draggable("option", "axis", false);
+                    if (!window.xx) {
+                        $('#img').draggable("option", "axis", "y");
+                    }
+                    if (!window.yy) {
+                        $('#img').draggable("option", "axis", "x");
+                    }
+                }
+            });
 
 
-                $('#v_line').css({
-                    left: $('#crop').width() / 2,
-                    top: 0
-                });
-                $('#mark').css({
-                    left: $('#crop').width() / 2
-                });
+            $('#v_line').css({
+                left: $('#crop').width() / 2,
+                top: 0
+            });
+            $('#mark').css({
+                left: $('#crop').width() / 2
+            });
 
-                $('#c1').attr('data-v', crop.id);
+            $('#c1').attr('data-v', crop.id);
 
-                var v = 0;
-                $('#mark_s').draggable({
-                    axis: "y",
-                    containment: "parent",
-                    drag: function (event, ui) {
-                        var t = 345 - ui.position.top;
-                        setres(v < t ? x_xx : -x_xx);
-                        v = t;
-                    },
-                    revert: true,
-                    revertDuration: 30
-                });
+            var v = 0;
+            $('#mark_s').draggable({
+                axis: "y",
+                containment: "parent",
+                drag: function (event, ui) {
+                    var t = 345 - ui.position.top;
+                    setres(v < t ? x_xx : -x_xx);
+                    v = t;
+                },
+                revert: true,
+                revertDuration: 30
+            });
+
+
+
+
 
 // перемещение вертикальных границ
-                $('#mark').draggable({
-                    axis: "x",
-                    containment: "parent",
-                    drag: function (event, ui) {
-                        crop.width = ui.position.left * 2;
-                        $('#crop').css({
-                            height: crop.height,
-                            width: crop.width,
-                            left: Cx - crop.width / 2 - 1,
-                            top: Cy - crop.height / 2 - 1
-                        });
-                        $('#v_line').css({
-                            left: $('#crop').width() / 2,
-                            top: 0
-                        });
-                    }
-                });
-
-                $('#right_mark').mousewheel(function (event, delta) {
-                    var crop_v = $('#crop').width() / 2;
-                    if (crop.width === 700 && delta > 0) {
-                        return false;
-                    } else if (crop.width === 0 && delta < 0) {
-                        return false;
-                    } else {
-                        crop.width += delta > 0 ? 1 : -1;
-                    }
+            $('#mark').draggable({
+                axis: "x",
+                containment: "parent",
+                drag: function (event, ui) {
+                    crop.width = ui.position.left * 2;
                     $('#crop').css({
                         height: crop.height,
                         width: crop.width,
@@ -286,35 +268,55 @@
                         top: Cy - crop.height / 2 - 1
                     });
                     $('#v_line').css({
-                        left: crop_v
+                        left: $('#crop').width() / 2,
+                        top: 0
                     });
-                    $('#mark').css({
-                        left: crop_v
-                    });
+                }
+            });
+
+            $('#right_mark').mousewheel(function (event, delta) {
+                var crop_v = $('#crop').width() / 2;
+                if (crop.width === 700 && delta > 0) {
                     return false;
+                } else if (crop.width === 0 && delta < 0) {
+                    return false;
+                } else {
+                    crop.width += delta > 0 ? 1 : -1;
+                }
+                $('#crop').css({
+                    height: crop.height,
+                    width: crop.width,
+                    left: Cx - crop.width / 2 - 1,
+                    top: Cy - crop.height / 2 - 1
                 });
+                $('#v_line').css({
+                    left: crop_v
+                });
+                $('#mark').css({
+                    left: crop_v
+                });
+                return false;
+            });
 
 // перемещение горизонтальных границ
-                $('#mark_b').draggable({
-                    axis: "y",
-                    containment: "parent",
-                    drag: function (event, ui) {
-                        crop.height = 2 * (Cy - ui.position.top) - 2;
-                        $('#crop').css({
-                            height: crop.height,
-                            width: crop.width,
-                            left: Cx - crop.width / 2 - 1,
-                            top: Cy - crop.height / 2 - 1
-                        });
-                        $('#h_line').css({
-                            top: ui.position.top,
-                            left: 0
-                        });
-                    }
-                });
-                $('#c2 span:eq(1)').css('color', '#00ff00');
-
+            $('#mark_b').draggable({
+                axis: "y",
+                containment: "parent",
+                drag: function (event, ui) {
+                    crop.height = 2 * (Cy - ui.position.top) - 2;
+                    $('#crop').css({
+                        height: crop.height,
+                        width: crop.width,
+                        left: Cx - crop.width / 2 - 1,
+                        top: Cy - crop.height / 2 - 1
+                    });
+                    $('#h_line').css({
+                        top: ui.position.top,
+                        left: 0
+                    });
+                }
             });
+            $('#c2 span:eq(1)').css('color', '#00ff00');
 
 
             $('#bottom_mark').mousewheel(function (event, delta) {
@@ -396,6 +398,10 @@
                     setres(delta > 0 ? x_xx : -x_xx);
                 }
                 return false;
+            }).mousedown(function () {
+                $(this).css('cursor', 'url(CSS/move.cur),auto');
+            }).mouseup(function () {
+                $(this).css('cursor', 'url(CSS/resize.cur),auto');
             });
 
             function setres(p) {
