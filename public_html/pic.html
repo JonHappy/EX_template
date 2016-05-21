@@ -164,11 +164,13 @@
                             window.xx = false;
                             window.yy = true;
                             $('#arrow_h').css('background-image', 'url(pic/arrow_h_red.png)');
+                            $('#div1').css('cursor', 'url(CSS/arrow3.cur),auto');
                             break;
                         case 17:
                             window.yy = false;
                             window.xx = true;
                             $('#arrow_v').css('background-image', 'url(pic/arrow_v_red.png)');
+                            $("#div1").css('cursor', 'url(CSS/arrow4.cur),auto');
                             window.ctrlDown = true;
                             break;
                     }
@@ -183,12 +185,14 @@
                             window.yy = true;
                             $('#arrow_h').css('background-image', 'url(pic/arrow_h_green.png)');
                             window.shiftDown = false;
+                            $("#div1").css('cursor', 'url(CSS/resize.cur),auto');
                             break;
                         case 17:
                             window.xx = true;
                             window.yy = true;
                             $('#arrow_v').css('background-image', 'url(pic/arrow_v_green.png)');
                             window.ctrlDown = false;
+                            $("#div1").css('cursor', 'url(CSS/resize.cur),auto');
                             break;
                     }
 
@@ -224,7 +228,6 @@
                             $('#img').draggable("option", "axis", "x");
                         }
                     }
-
                 });
 
 
@@ -250,6 +253,10 @@
                     revert: true,
                     revertDuration: 30
                 });
+
+
+
+
 
 // перемещение вертикальных границ
                 $('#mark').draggable({
@@ -396,7 +403,11 @@
                     setres(delta > 0 ? x_xx : -x_xx);
                 }
                 return false;
-            });
+            }).mousedown(function () {
+                    $(this).css('cursor', 'url(CSS/move.cur),auto');
+                }).mouseup(function () {
+                    $(this).css('cursor', 'url(CSS/resize.cur),auto');
+                    });
 
             function setres(p) {
                 img.scale += p;

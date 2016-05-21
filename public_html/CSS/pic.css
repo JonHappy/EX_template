@@ -11,6 +11,7 @@ button#arrow_v{ -moz-user-select: none;
     border: 1px solid #c0c0c0;
     box-sizing: border-box;
     overflow: hidden;
+    cursor: url(resize.cur), auto;
 }
 #div1 img{
     position: relative;
@@ -27,6 +28,7 @@ button#arrow_v{ -moz-user-select: none;
     width: 694px;
     transform-origin: 0 0;
     transform: rotate(90deg);
+    cursor: url(rotate.cur), 	default;
 }
 #crop{
     pointer-events:none;
