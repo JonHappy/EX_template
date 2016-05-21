@@ -35,8 +35,16 @@
         <button id="arrow_h"  class="arrow_vh"></button>
 
         <div class="cropped"></div>
+        <div style="cursor: url(CSS/move.cur), auto; display: none;"></div>
+        <div style="cursor: url(CSS/arrow3.cur), auto; display: none;"></div>
+        <div style="cursor: url(CSS/arrow4.cur), auto; display: none;"></div>
 
         <script>
+
+//             document.getElementById('file').style='cursor:url(CSS/move.cur),auto;';
+//             document.getElementById('file').style='cursor:url(CSS/arrow3.cur),auto;';
+//             document.getElementById('file').style='cursor:url(CSS/arrow4.cur),auto;';
+//             document.getElementById('file').style='cursor:auto;';
             var pics = {
                 full_height: 700,
                 full_width: 600,
@@ -399,8 +407,10 @@
                     setres(delta > 0 ? x_xx : -x_xx);
                 }
                 return false;
-            }).mousedown(function () {
-                $(this).css('cursor', 'url(CSS/move.cur),auto');
+            }).mousedown(function (event) {
+                document.getElementById('div1').style='cursor:url(CSS/move.cur),auto;';
+                event.preventDefault();
+//                $(this).css('cursor', 'url(CSS/move.cur),auto');
             }).mouseup(function () {
                 $(this).css('cursor', 'url(CSS/resize.cur),auto');
             });

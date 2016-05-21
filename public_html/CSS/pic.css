@@ -11,7 +11,7 @@ button#arrow_v{ -moz-user-select: none;
     border: 1px solid #c0c0c0;
     box-sizing: border-box;
     overflow: hidden;
-    cursor: url(resize.cur), auto;
+    cursor: url(resize.cur), auto ;
 }
 #div1 img{
     position: relative;
@@ -107,7 +107,7 @@ button#arrow_v{ -moz-user-select: none;
     top: 6px;
     left: 749px;
     border:  solid 1px #d0d0d0;
-     cursor: url(arrow1.cur),crosshair;
+    cursor: url(arrow1.cur),crosshair;
 }
 
 #bottom_mark div{
