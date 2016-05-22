@@ -350,10 +350,13 @@
                     ev.stopPropagation();
                 });
 
-                $(p).find('.tb1').on('click', function () {
+                $(p).find('.tb1').on('click', function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
                     $(w.obj).html($(this).html());
                     w.close();
-                });
+                    return false;
+                },true);
 
             </script>
         </template>
