@@ -35,7 +35,7 @@
         <button id="arrow_h"  class="arrow_vh"></button>
 
         <div class="cropped"></div>
-        
+
         <div style="cursor: url(CSS/move.cur), auto; display: none;"></div>
         <div style="cursor: url(CSS/arrow3.cur), auto; display: none;"></div>
         <div style="cursor: url(CSS/arrow4.cur), auto; display: none;"></div>
@@ -177,7 +177,12 @@
                         $("#div1").css('cursor', 'url(CSS/arrow4.cur),auto');
                         window.ctrlDown = true;
                         break;
+                    case 18:
+                        window.altDown = true;
+                        $("#div1").css('cursor', 'url(CSS/rotate.cur),auto');
+                        break;
                 }
+                return false;
             });
 
             $(document).keyup(function (event) {
@@ -196,6 +201,10 @@
                         $('#arrow_v').css('background-image', 'url(pic/arrow_v_green.png)');
                         window.ctrlDown = false;
                         $("#div1").css('cursor', 'url(CSS/resize.cur),auto');
+                        break;
+                    case 18:
+                        $("#div1").css('cursor', 'url(CSS/resize.cur),auto');
+                        window.altDown = false;
                         break;
                 }
             });
@@ -383,7 +392,7 @@
                 }
             });
 
-//            <%-- ресайз + перемещкние (мышь в поле для картинки --%>
+//            <%-- ресайз + перемещкние + поворот (мышь в поле для картинки --%>
             $('#div1').mousewheel(function (event, delta) {
 
 //                  shiftDown + mousewheel - > перемещение по вертикали
@@ -398,14 +407,21 @@
                     new_img.top = current_img.top;
                     tr_or();
                 }
-
+//                поворот
+                if (window.altDown) {
+                    img.rotate = parseInt($('#rotate').val());
+                    img.rotate += delta > 0 ? 1 : -1;
+                    $('#rotate').val(img.rotate);
+                    set_css_img();
+                    return false;
+                }
 //                  изменение размера
                 if (!window.ctrlDown && !window.shiftDown) {
                     setres(delta > 0 ? x_xx : -x_xx);
                 }
                 return false;
             }).mousedown(function (event) {
-                document.getElementById('div1').style='cursor:url(CSS/move.cur),auto;';
+                document.getElementById('div1').style = 'cursor:url(CSS/move.cur),auto;';
                 event.preventDefault();
 //                $(this).css('cursor', 'url(CSS/move.cur),auto');
             }).mouseup(function () {
