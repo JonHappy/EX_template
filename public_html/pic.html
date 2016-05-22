@@ -105,10 +105,10 @@
                 current_img.y = new_img.y;
             }
 
-//            <%-- переключатель full/preview --%>
+//            <%-------------------------- переключатель full/preview --------------------------%>
             $(document).on('click', '#c1', function () {
                 if (crop.height === pics.preview_height) {
-//            <%-- включение режима full --%>
+//            <%-------------------------- включение режима full --------------------------%>
                     $('#bottom_mark').css('display', 'block');
                     $('#mark_b').css('top', '0px');
 //                    $('#h_line').css('top', '-10px');
@@ -127,7 +127,7 @@
                     });
 
                 } else {
-//            <%-- включение режима preview --%>
+//            <%-------------------------- включение режима preview --------------------------%>
                     $('#bottom_mark').css('display', 'none');
                     $('#h_line').css('display', 'none');
                     crop.width = crop.width / crop.height * pics.preview_height;
@@ -155,8 +155,8 @@
             });
 
 
-//            <%-- назначение пермещения --%>
-
+//            <%-------------------------- назначение пермещения , повороты --------------------------%>
+//            <%-------------------------- keyDown --------------------------%>
 
             window.xx = true;
             window.yy = true;
@@ -184,7 +184,7 @@
                 }
                 return false;
             });
-
+//                <%-------------------------- keyUp --------------------------%>
             $(document).keyup(function (event) {
                 var k = event.keyCode || event.charCode;
                 switch (k) {
@@ -208,7 +208,7 @@
                         break;
                 }
             });
-
+//                <%-------------------------- перемещение картинки --------------------------%>
             $('#img').draggable({
                 stop: function (event, ui) {
                     current_img.top = ui.originalPosition.top;
@@ -253,6 +253,8 @@
             $('#c1').attr('data-v', crop.id);
 
             var v = 0;
+
+//            <%-------------------------- перемещение горизонтальных границ обрезки --------------------------%>
             $('#mark_s').draggable({
                 axis: "y",
                 containment: "parent",
@@ -266,10 +268,7 @@
             });
 
 
-
-
-
-// перемещение вертикальных границ
+//              <%-------------------------- перемещение вертикальных границ обрезки --------------------------%>
             $('#mark').draggable({
                 axis: "x",
                 containment: "parent",
@@ -287,7 +286,7 @@
                     });
                 }
             });
-
+//                <%-------------------------- пермещение горизонтальных границ обрезки колесом --------------------------%>
             $('#right_mark').mousewheel(function (event, delta) {
                 var crop_v = $('#crop').width() / 2;
                 if (crop.width === 700 && delta > 0) {
@@ -312,7 +311,7 @@
                 return false;
             });
 
-// перемещение горизонтальных границ
+//          <%-------------------------- перемещение горизонтальных границ --------------------------%>
             $('#mark_b').draggable({
                 axis: "y",
                 containment: "parent",
@@ -333,7 +332,7 @@
             $('#c2 span:eq(1)').css('color', '#00ff00');
 
 
-
+//                <%-------------------------- перемещение вертикалихых границ обрезки колесом --------------------------%>
             $('#bottom_mark').mousewheel(function (event, delta) {
                 var crop_h = $('#crop').height() / 2;
                 if ($('#crop').height() === 700 && delta > 0) {
@@ -359,7 +358,7 @@
             });
 
 
-//            <%-- запрет перемещения --%>
+//            <%-------------------------- запрет перемещения --------------------------%>
             $(document).on('click', '#arrow_h', function () {
                 if (window.xx) {
                     $('#arrow_h').css('background-image', 'url(pic/arrow_h_red.png)');
@@ -379,7 +378,7 @@
             });
 
 
-//            <%-------------------------- скорость ресайза --------------------------------------%>
+//            <%-------------------------- скорость ресайза --------------------------%>
             $(document).on('click', '#c2', function () {
                 if (x_xx === 0.001) {
                     $('#c2 span:eq(1)').css('color', '#00ff00');
@@ -392,22 +391,22 @@
                 }
             });
 
-//            <%-- ресайз + перемещкние + поворот (мышь в поле для картинки --%>
+//            <%-------------------------- ресайз + перемещкние + поворот (мышь в поле для картинки --------------------------%>
             $('#div1').mousewheel(function (event, delta) {
 
-//                  shiftDown + mousewheel - > перемещение по вертикали
+//                 <%-------------------------- shiftDown + mousewheel - > перемещение по вертикали --------------------------%>
                 if (window.shiftDown) {
                     new_img.top = delta > 0 ? current_img.top + 1 : current_img.top - 1;
                     new_img.left = current_img.left;
                     tr_or();
                 }
-//                  ctrlDown + mousewheel - > перемещение по горионтали
+//                <%--------------------------  ctrlDown + mousewheel - > перемещение по горионтали --------------------------%>
                 if (window.ctrlDown) {
                     new_img.left = delta > 0 ? current_img.left + 1 : current_img.left - 1;
                     new_img.top = current_img.top;
                     tr_or();
                 }
-//                поворот
+//               <%-------------------------- поворот --------------------------%>
                 if (window.altDown) {
                     img.rotate = parseInt($('#rotate').val());
                     img.rotate += delta > 0 ? 1 : -1;
@@ -415,7 +414,7 @@
                     set_css_img();
                     return false;
                 }
-//                  изменение размера
+//               <%-------------------------- изменение размера --------------------------%>
                 if (!window.ctrlDown && !window.shiftDown) {
                     setres(delta > 0 ? x_xx : -x_xx);
                 }
@@ -465,13 +464,13 @@
                 });
             }
 
-//            <%-- поворот ползунком --%>
+//            <%-------------------------- поворот ползунком  --------------------------%>
             $(document).on('input', '#rotate', function () {
                 img.rotate = parseInt($('#rotate').val());
                 set_css_img();
             });
 
-//            <%-- поворот колесом мыши --%>
+//            <%-------------------------- поворот колесом мыши --------------------------%>
             $('#rotate').mousewheel(function (event, delta) {
                 img.rotate = parseInt($('#rotate').val());
                 img.rotate += delta > 0 ? 1 : -1;
@@ -480,7 +479,7 @@
                 return false;
             });
 
-//            <%-- загрузка файла --%>
+//            <%-------------------------- загрузка файла --------------------------%>
             var fb = [];
 
             document.querySelector('#file').addEventListener('change', function (evt) {
@@ -562,7 +561,7 @@
                 tr_or();
             }
 
-//            <%-- обрезка --%>
+//            <%-------------------------- обрезка --------------------------%>
             $(document).on('click', '#crop_button', function () {
                 console.time('x1');
                 if ($('.cropped').has($('#' + $('#c1').attr('data-v'))).length !== 0) {
@@ -632,7 +631,7 @@
             });
 
 
-//            <%-- пошаговое уменьшение картинки --%>
+//            <%-------------------------- пошаговое уменьшение картинки --------------------------%>
             function resize(img, w, h) {
                 var steps = Math.ceil(Math.log(img.height / h) / Math.LN2);
                 var sW = w * Math.pow(2, steps - 1);
@@ -650,7 +649,7 @@
             }
 
 
-//            <%-- удаление обрезанной картинки --%>
+//            <%-------------------------- удаление обрезанной картинки --------------------------%>
             $(document).on('click', '.del', function () {
                 var t = $(this).parent();
                 if ($(t).find('img:first').attr('id') === 'full') {
