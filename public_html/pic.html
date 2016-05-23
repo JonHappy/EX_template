@@ -33,7 +33,7 @@
         <button id="save" disabled="" >Сохранить</button>
         <button id="arrow_v" class="arrow_vh"></button>
         <button id="arrow_h"  class="arrow_vh"></button>
-
+        <div id="list_files"></div>
         <div class="cropped"></div>
 
         <div style="cursor: url(CSS/move.cur), auto; display: none;"></div>
@@ -482,24 +482,32 @@
 //            <%-------------------------- загрузка файла --------------------------%>
             var fb = [];
 
-            document.querySelector('#file').addEventListener('change', function (evt) {
+            document.getElementById('file').addEventListener('change', function (evt) {
                 var n = evt.target.files.length;
                 var g = n;
+                var name_files = [];
+                var a = 0;
+                var x = document.getElementById('list_files');
                 for (var i = 0; i < n; i++) {
                     var reader = new FileReader();
                     reader.readAsDataURL(this.files[i]);
-                    reader.onload = function (e) {
+//                    document.getElementById('list_files').innerHTML += this.files[i].name;
+                    name_files.push('<span id="file' + i + '">' + this.files[i].name + ' &nbsp; &nbsp; &nbsp;</span>');
+                    reader.onloadend = function (e) {
                         --g;
-                        console.dir('onload  ');
+                        console.dir(e);
+                        x.innerHTML += name_files[a];
+////                        $('#list_files').append(name_files.shift());
                         var pic = new Image();
                         pic.src = e.target.result;
+                        pic.nn = a++;
                         fb.push(pic);
                         if (g === 0) {
                             work();
                         }
                     };
                 }
-            });
+            }, true);
 
 
             var target = document.getElementById("div1");
@@ -513,13 +521,18 @@
                 var files = event.dataTransfer.files;
                 var n = files.length;
                 var g = n;
+                var a = 0;
+                var name_files = [];
                 for (var i = 0; i < n; i++) {
                     var reader = new FileReader();
                     reader.readAsDataURL(event.dataTransfer.files[i]);
+                    name_files.push('<span id="file' + i + '">' + event.dataTransfer.files[i].name + ' &nbsp; &nbsp; &nbsp;</span>');
                     reader.onload = function (e) {
                         --g;
+                        $('#list_files').append(name_files.shift());
                         var pic = new Image();
                         pic.src = e.target.result;
+                        pic.nn = a++;
                         fb.push(pic);
                         if (g === 0) {
                             work();
@@ -536,7 +549,11 @@
                     window.close();
                 }
                 var pic = new Image();
-                pic.src = fb.shift().src;
+                pic.src = fb[0].src;
+                console.log();
+                $('#list_files').find('#file' + (fb[0].nn - 1)).css('color', 'green');
+                $('#list_files').find('#file' + fb[0].nn).css('color', 'red');
+                fb.shift();
                 $('#img').attr('src', pic.src);
                 img.scale = 700 / parseInt(pic.width);
                 img.height = parseInt(pic.height);
